@@ -67,7 +67,7 @@ sub caclulateInfos()
           }
           else
           {
-               print("Less than \$25.00 \n");
+               print("Less than \$" . TWENTYFIVE . ".00\n");
                last;
           }
      }
