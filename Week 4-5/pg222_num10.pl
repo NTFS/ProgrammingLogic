@@ -48,22 +48,31 @@ sub settotalLeft()
 
 sub makesPayment()
 {
-     my $paidAmount;
-     $paidAmount = $totalLeft * SEVENPERCENT;
-     $totalLeft = $totalLeft - $paidAmount;
+     $totalLeft = $totalLeft - ($totalLeft * SEVENPERCENT);
 }
 
 sub caclulateInfos()
 {
      print("\n\nAccount Number: " . $accountNum . ", ");
      print("Customer: " . $customerName . " \n");
+     my $initialValue;
      for(my $i = 1; $i <= TWELVEMONTHS; $i++)
      {
           if($totalLeft > TWENTYFIVE)
           {
-          $totalLeft = $totalLeft + ($totalLeft * STOREINTEREST);
-          print("Month " . $i . ": " . $totalLeft . "\n");
-          makesPayment();
+               #$totalLeft = $totalLeft + ($totalLeft * STOREINTEREST);
+               if($i != 1)
+               {
+               $totalLeft = $totalLeft + (($totalLeft * SEVENPERCENT) * STOREINTEREST);
+               #adding 1.25% to the payment due and adding to totalLeft.
+               print("Month " . $i . ": " . $totalLeft . "\n");
+               makesPayment();
+               }
+               else
+               {
+                    print("Month " . $i . ": " . $totalLeft . "\n");
+                    makesPayment();
+               }
           }
           else
           {
