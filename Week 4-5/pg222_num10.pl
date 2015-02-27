@@ -9,11 +9,11 @@ use warnings;
 my ($accountNum, $purchasePrice, $continueInt, $totalLeft, $setContinuous);
 my $customerName;
 
-use constant STOREINTEREST => 1.25;
+use constant STOREINTEREST => .0125;
 use constant TWENTYFIVE => 25;
 use constant TWELVEMONTHS => 12;
-use constant SEVENPERCENT => .7;
-sub main()
+use constant SEVENPERCENT => .07;
+sub main
 {
      setContinueInt();
 	use constant YES => 1;
@@ -24,18 +24,12 @@ sub main()
           setCustomerName();
           setpurchasePrice();
           settotalLeft();
-          setContinuous();
           caclulateInfos();
           setContinueInt();
      }
 }
 
 main();
-
-sub setContinuous()
-{
-     print("Would you like to loop until ")
-}
 
 sub getContinuous()
 {
@@ -61,13 +55,13 @@ sub makesPayment()
 
 sub caclulateInfos()
 {
-     print("\nAccount Number: " . $accountNum . ", ");
+     print("\n\nAccount Number: " . $accountNum . ", ");
      print("Customer: " . $customerName . " \n");
      for(my $i = 1; $i <= TWELVEMONTHS; $i++)
      {
-          if($totalLeft > 25)
+          if($totalLeft > TWENTYFIVE)
           {
-          $totalLeft = $totalLeft * STOREINTEREST;
+          $totalLeft = $totalLeft + ($totalLeft * STOREINTEREST);
           print("Month " . $i . ": " . $totalLeft . "\n");
           makesPayment();
           }
