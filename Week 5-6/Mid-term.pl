@@ -15,31 +15,40 @@ use constant CARDPINNUM => 1337;
 use constant VERIFIED => 1;
 use constant NOTVERIFIED => 0;
 use constant THIRDATTEMPT => 3;
-my ($userInputAuth $currentMoney, $cardNumber, $cardPin, $countAuthVerify); #int
+my ($userInputAuth, $currentMoney, $cardNumber, $cardPin, $countAuthVerify); #int
 my ($chNumber, $chPin, $withdrawl, $deposit, $transferFunds, $pinNumber, $counter, $continue); #int
 my ($cardHolderName, $chName, $currentCMD); #string
 sub main {
     setCounter();
     setContinue();
     while ($continue == YES) {
-     chooseWhatToDo();
+     cleanValues();
      setCardHolderName();
      setCardNumber();
-     setPinNumber();
+     setpinNumber();
      runSecurityAuth();
-     while($countAuthVerify < THIRDATTEMPT)
+     if($countAuthVerify < THIRDATTEMPT)
      {
-     if($userInputAuth == VERIFIED)
-     {
-          
+          if($userInputAuth == VERIFIED)
+          {
+               chooseWhatToDo();
+               $userInputAuth = NOTVERIFIED;
+          }
      }
-     }
-     
+     setContinue();
+     system("cls");
     }
 }
 
 main();
 
+sub cleanValues {
+     $countAuthVerify = 0;
+    $cardNumber = 0;
+    $cardPin = 0;
+    $currentMoney = 1000;
+    
+}
 
 sub setCounter {
 	if (defined $counter)
@@ -76,18 +85,18 @@ sub chooseWhatToDo {
      use constant TRANSFER => "T";
      print("What would you like to do?\n" . "W - Withdrawl, D - Deposit, T - TransferFunds: ");
      chomp ($currentCMD = <STDIN>);
-     if($currentCMD == WITHDRAWL)
+     if($currentCMD eq(WITHDRAWL))
      {
-          
+          setWithdrawl();
      }
-     elsif($currentCMD == DEPOSIT)
+     elsif($currentCMD eq(DEPOSIT))
      {
-          
+          setDeposit();
      }
      
-     elsif($currentCMD == TRANSFER)
+     elsif($currentCMD eq(TRANSFER))
      {
-          
+          setTransferFunds();
      }
      else
      {
@@ -97,7 +106,7 @@ sub chooseWhatToDo {
 }
 
 sub runSecurityAuth {
-     if($chName != $cardHolderName or $chNumber != $cardNumber or $cardPin != $cardPin)
+     if($chName eq(!$cardHolderName) || $chNumber != $cardNumber || $chPin != $cardPin)
      {
           print("Failed validating the Card Holders information.\n");
           $userInputAuth = NOTVERIFIED;
@@ -117,13 +126,14 @@ sub runSecurityAuth {
 
 
 sub setWithdrawl {
-     print("Please input amount to withdrawl: ")
+     print("Please input amount to withdrawl: ");
      chomp($withdrawl = <STDIN>);
      
 }
 
 sub setDeposit {
-     
+     print("Please input amount you would like to deposit: ");
+     chomp($deposit = <STDIN>)
 }
 
 sub setCardHolderName {
@@ -132,11 +142,12 @@ sub setCardHolderName {
 }
 
 sub setTransferFunds {
-     
+     print("Please input the amount you would like to transfer: ");
+     chomp($transferFunds = <STDIN>);
 }
 
 sub setpinNumber {
-     print("[3/3] For Security reasons, please input the PIN Number: \n");
+     print("[3/3] For Security reasons, please input the PIN Number: ");
      chomp($chPin = <STDIN>);
 }
 
@@ -146,15 +157,15 @@ sub setCardNumber {
 }
 
 sub getWithdrawl {
-     print("");
+     print($withdrawl . "\n");
 }
 
 sub getDeposit {
-     print("");
+     print($deposit . "\n");
 }
 
 sub getTransferFunds {
-     print("");
+     print($transferFunds . "\n");
 }
 
 sub getpinNumber {
