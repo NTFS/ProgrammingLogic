@@ -13,11 +13,11 @@ use constant CARDHOLDERNAME => "Bob";
 use constant CARDNUMBER => 13371337;
 use constant CARDPINNUM => 1337;
 use constant VERIFIED => 1;
-use constant THIRDATTEMPT => 3;
 use constant NOTVERIFIED => 0;
-my ($withdrawl, $deposit, $transferFunds, $pinNumber, $counter, $continue, $userInputAuth $currentMoney, $cardHolderName, $cardNumber, $cardPin, $currentCMD, $countAuthVerify);
-my ($chName, $chNumber, $chPin);
-
+use constant THIRDATTEMPT => 3;
+my ($userInputAuth $currentMoney, $cardNumber, $cardPin, $countAuthVerify); #int
+my ($chNumber, $chPin, $withdrawl, $deposit, $transferFunds, $pinNumber, $counter, $continue); #int
+my ($cardHolderName, $chName, $currentCMD); #string
 sub main {
     setCounter();
     setContinue();
