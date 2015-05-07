@@ -35,6 +35,7 @@ sub main {
                $userInputAuth = NOTVERIFIED;
           }
      }
+     system("cls");
      setContinue();
      system("cls");
     }
@@ -93,7 +94,6 @@ sub chooseWhatToDo {
      {
           setDeposit();
      }
-     
      elsif($currentCMD eq(TRANSFER))
      {
           setTransferFunds();
@@ -106,7 +106,7 @@ sub chooseWhatToDo {
 }
 
 sub runSecurityAuth {
-     if($chName eq(!$cardHolderName) || $chNumber != $cardNumber || $chPin != $cardPin)
+     if($chName eq(CARDHOLDERNAME) || $chNumber != CARDNUMBER || $chPin != CARDPINNUM)
      {
           print("Failed validating the Card Holders information.\n");
           $userInputAuth = NOTVERIFIED;

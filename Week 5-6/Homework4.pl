@@ -19,7 +19,6 @@ sub main {
 	setCounter();
 while ($continue == YES)
      {
-     
      setteacherNames();
      setbooksDonated();
      
